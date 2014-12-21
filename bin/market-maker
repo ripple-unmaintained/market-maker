@@ -1,0 +1,29 @@
+#!/usr/local/bin/node
+
+var program = require('commander');
+var fs      = require('fs');
+var market  = require('../src/market');
+
+function startMarket(path) {
+  if (fs.existsSync(path)) {
+    if (fs.isFileSync(path)) {
+      var marketMaker = new MarketMaker(require(path));
+      marketMaker.start();
+    } else {
+      throw new Error(path, 'is not a file');
+    }
+  } else {
+    throw new Error('file does not exist', path);
+  }
+}
+
+program
+  .command('start <path>')
+  .description('start a trading bot process')
+  .action(function(path) {
+    console.log('get the path', path);
+  });
+
+program
+  .parse(process.argv);
+
