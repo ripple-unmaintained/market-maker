@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test" : "mocha -R spec build/test",
+    "test" : "npm run build && mocha -R spec build/test",
     "build": "gulp"
   },
   "bin": {

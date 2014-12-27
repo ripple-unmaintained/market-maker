@@ -4,7 +4,7 @@ var TIMEOUT              = 10000;
 
 class MarketMaker {
  
-  constructor() {
+  constructor(options) {
     if (!options) { throw new Error('No module found') }
     if (!(typeof options.getRate === 'function')) { throw new Error('options.rate must be a function') }
     if (!(typeof options.getAmount === 'function')) { throw new Error('options.amount must be a function') }
@@ -20,7 +20,8 @@ class MarketMaker {
     this.secret         = options.secret
     this.timeout        = options.timeout || TIMEOUT
     this.accountMonitor = new RippleAccountMonitor({
-      address: options.address,
+      rippleRestUrl: 'https://api.ripple.com/v1',
+      account: options.address,
       secret : options.secret
     })
   }
@@ -45,7 +46,7 @@ class MarketMaker {
             next()
           });
       }, _this.timeout)
-    }
+    });
   }
 }
 
