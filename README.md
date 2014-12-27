@@ -59,3 +59,29 @@ making a market
 Which will spawn a new system process that monitors the ripple network for
 trades and automatically balances the order book for the specified currency.
 
+### Proposed Interface
+
+#### Submitting an Offer
+
+    var offer = new Offer({
+      account: 'r4fvGghXiSSEQxhfaY7kmqzxHvSoF8sUhy',
+      buy: {
+        amount  : 10,
+        currency: 'XAG',
+        issuer  : 'rP6AY2Azjy8oDQm5YEBKSDoEjC26nDbCXV'
+      },
+      sell: {
+        amount  : 1000,
+        currency: 'XRP'
+      }
+    }) 
+
+    offer.submit({ secret: 'shHgHo7RdfggErwkAqFhDtScMKcHx' })
+      .then(function(response) {
+        console.log('SUCCESS', response)
+      })
+      .error(function(error) {
+        console.log('ERROR', error)
+      });
+
+

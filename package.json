@@ -1,23 +1,24 @@
 {
   "name": "market-maker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test" : "npm run build && mocha -R spec build/test",
+    "test": "npm run build && mocha -R spec build/test --timeout 10000",
     "build": "gulp"
   },
   "bin": {
     "market-maker": "bin/market-maker"
   },
   "dependencies": {
-    "ripple-account-monitor": "",
     "bluebird": "",
     "commander": "",
-    "ripple-rest-client": "",
-    "ripple-lib": "",
+    "domain-supervisor": "^0.3.1",
     "gulp": "",
-    "gulp-6to5": ""
+    "gulp-6to5": "",
+    "ripple-account-monitor": "",
+    "ripple-lib": "",
+    "ripple-rest-client": ""
   },
   "author": "",
   "license": "ISC"
