@@ -1,8 +1,10 @@
 #!/usr/local/bin/node
 
-var program = require('commander');
-var fs      = require('fs');
-var market  = require('../src/market');
+var program      = require('commander');
+var fs           = require('fs');
+var path         = require('path');
+var Market       = require(path.join(__dirname+'/../build/market'));
+var MarketMaker  = require(path.join(__dirname+'/../build/market_maker'));
 
 function startMarket(path) {
   if (fs.existsSync(path)) {
