@@ -2,6 +2,18 @@
 
 ## Daemon to automatically make a market between your currency and XRP ##
 
+## Installation ##
+
+    npm install -g market-maker
+
+## Build from Source ##
+
+    npm run build
+
+## Run the Tests ##
+
+    npm test
+
 ## USAGE ##
 
 Configure the currencies you would like to support, the size of the market
@@ -41,7 +53,6 @@ Example:
 
 Then run the `market-maker start` command specifying the currency to begin
 making a market
-
 
     market-maker start currencies/btc
 
