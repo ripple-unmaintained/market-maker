@@ -1,5 +1,8 @@
 # Market Maker #
 
+The software is in Alpha currently under development!
+=====================================================
+
 ## Daemon to automatically make a market between your currency and XRP ##
 
 ## Installation ##
