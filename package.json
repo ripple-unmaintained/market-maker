@@ -1,11 +1,12 @@
 {
   "name": "market-maker",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "npm run build && mocha -R spec build/test --timeout 10000",
-    "build": "gulp"
+    "build": "gulp",
+    "start": "./bin/market-maker start"
   },
   "bin": {
     "market-maker": "bin/market-maker"

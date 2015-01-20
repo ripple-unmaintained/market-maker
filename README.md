@@ -1,90 +1,58 @@
 # Market Maker #
 
-The software is in Alpha currently under development!
-=====================================================
+Automatically make a market between a currency and XRP
 
-## Daemon to automatically make a market between your currency and XRP ##
+##### ALPHA SOFTWARE
+
+Thousands of developers and institutions need a simple and effective mechanism to make a market from their currency to XRP. Market Maker is a humble attempt at an elegant and reliable solution they crave.
+
+## Dependencies
+
+- Node.js
 
 ## Installation ##
 
     npm install -g market-maker
 
-## Build from Source ##
+## Configuration
+All config settings are set via environment variables.
 
+The following environment variables must be set, which provide the ripple secret key for the trading account, and setup the market parameters:
+
+- RIPPLE_MARKET_MAKER_KEY
+- RIPPLE_MARKET_CURRENCY
+- RIPPLE_MARKET_ISSUER
+- RIPPLE_MARKET_XRP_DEPTH
+- RIPPLE_MARKET_XRP_PRICE
+
+## Processes
+Market Maker is composed of two concurrent processes. The first watches the ripple ledger for trades on the market currency, and notes which adjustments must be made to reconstruct the desired market. The second actually performs updates to the ripple market ledger by placing new orders.
+
+- Monitoring the market order book
+- Modifying the market order book
+
+## Contributing
+
+Architecure shall follow closely the [Twelve-Factor App](http://12factor.net/) design principles.
+
+To contribute a feature fork the project and add your feature under a feature flag in a feature branch. Feature flags can be enabled individually like so:
+
+````
+market-maker start --feature multi-market
+````
+
+Make a pull request from your fork's feature branch into the origin master branch with the feature disabled by default.
+
+Pull requests must not be accepted without test coverage, and automated test builds must pass before merging any pull requests.
+
+### Build From Source
+
+First install git and node.js, then run the build tasks:
+
+    git clone https://github.com/ripple/market-maker.git
+    cd market-maker
+    npm install
     npm run build
-
-## Run the Tests ##
-
-    npm test
-
-## USAGE ##
-
-Configure the currencies you would like to support, the size of the market
-you would like to make, and a function to determine the market price.
-
-/currencies/
-  btc.js
-  ltc.js
-  xag.js
-  xau.js
-  sgz.js
-
-Each currency module should export a function that determines the rate,
-as well as a function that determines the price, and properties that
-determine the currency and wallet to use
-
-Example:
-
-    //btc.js
-
-    exports.rate = function(resolve, reject) {
-      // returns a Promise<Decimal>
-    }
-
-    exports.total = function(resolve, reject) {
-      // total XRP you would like to sell at the rate
-      // returns a Promise<Decimal>
-    }
-
-    exports.address = process.env.RIPPLE_ADDRESS;
-
-    exports.secret = process.env.RIPPLE_SECRET;
-
-    exports.currency = 'BTC';
-
-    exports.issuer = process.env.RIPPLE_ADDRESS;
-
-Then run the `market-maker start` command specifying the currency to begin
-making a market
-
-    market-maker start currencies/btc
-
-Which will spawn a new system process that monitors the ripple network for
-trades and automatically balances the order book for the specified currency.
-
-### Proposed Interface
-
-#### Submitting an Offer
-
-    var offer = new Offer({
-      account: 'r4fvGghXiSSEQxhfaY7kmqzxHvSoF8sUhy',
-      buy: {
-        amount  : 10,
-        currency: 'XAG',
-        issuer  : 'rP6AY2Azjy8oDQm5YEBKSDoEjC26nDbCXV'
-      },
-      sell: {
-        amount  : 1000,
-        currency: 'XRP'
-      }
-    }) 
-
-    offer.submit({ secret: 'shHgHo7RdfggErwkAqFhDtScMKcHx' })
-      .then(function(response) {
-        console.log('SUCCESS', response)
-      })
-      .error(function(error) {
-        console.log('ERROR', error)
-      });
+    npm run link
 
 
