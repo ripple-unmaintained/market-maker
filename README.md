@@ -1,6 +1,6 @@
 # Market Maker #
 
-Automatically make a market between a currency and XRP
+Automatically make a market between XRP and any single issued currency.
 
 ##### ALPHA SOFTWARE
 
@@ -12,7 +12,9 @@ Thousands of developers and institutions need a simple and effective mechanism t
 
 ## Installation ##
 
-    npm install -g market-maker
+````
+npm install -g market-maker
+````
 
 ## Configuration
 All config settings are set via environment variables.

@@ -1,31 +1,22 @@
 #!/usr/local/bin/node
-
-var program      = require('commander');
-var fs           = require('fs');
-var path         = require('path');
-var Market       = require(path.join(__dirname+'/../build/market'));
-var MarketMaker  = require(path.join(__dirname+'/../build/market_maker'));
-
-function startMarket(path) {
-  if (fs.existsSync(path)) {
-    if (fs.isFileSync(path)) {
-      var marketMaker = new MarketMaker(require(path));
-      marketMaker.start();
-    } else {
-      throw new Error(path, 'is not a file');
-    }
-  } else {
-    throw new Error('file does not exist', path);
-  }
-}
+var program = require('commander');
 
 program
-  .command('start <path>')
-  .description('start a trading bot process')
-  .action(function(path) {
-    console.log('get the path', path);
+  .command('start')
+  .description('start a market-maker trading bot')
+  .action(function() {
+    startMarket()
   });
 
 program
   .parse(process.argv);
 
+function startMarket() {
+  console.log('')
+  console.log('============================================================')
+  console.log('Alas this software is SUPER alpha, ie does not work at all.');
+  console.log('Please try again later or contact those bums at Ripple Labs');
+  console.log('Contributions are accepted at https://github.com/ripple/market-maker');
+  console.log('============================================================')
+  console.log('');
+}

@@ -1,8 +1,8 @@
 {
   "name": "market-maker",
-  "version": "0.1.3",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.4",
+  "description": "Automatically make a market between XRP and any single issued currency.",
+  "main": "buid/index.js",
   "scripts": {
     "test": "npm run build && mocha -R spec build/test --timeout 10000",
     "build": "gulp",
@@ -10,6 +10,10 @@
   },
   "bin": {
     "market-maker": "bin/market-maker"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ripple/market-maker"
   },
   "dependencies": {
     "bluebird": "",
