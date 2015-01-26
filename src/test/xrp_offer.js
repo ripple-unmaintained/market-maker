@@ -9,7 +9,7 @@ describe('Offer class always from XRP to Silver', function() {
         rate    : 100
       },
       buy: {
-        currency: 'XAG'
+        currency: 'XAG',
         issuer  : 'r4fvGghXiSSEQxhfaY7kmqzxHvSoF8sUhy'
       }
     });

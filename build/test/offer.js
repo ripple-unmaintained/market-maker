@@ -3,15 +3,15 @@
 var Offer = require(__dirname + "/../offer");
 
 describe("Sumitting an Offer", function () {
-  var account, secret;
+  var account, secret, offer;
 
   before(function () {
-    account = "r4fvGghXiSSEQxhfaY7kmqzxHvSoF8sUhy";
-    secret = "shHgHo7RdfggErwkAqFhDtScMKcHx";
+    account = process.env.RIPPLE_MARKET_MAKER_ADDRESS;
+    secret = process.env.RIPPLE_MARKET_MAKER_SECRET;
   });
 
   it("should offer to buy 1oz silver with 100XRP", function (done) {
-    var offer = new Offer({
+    offer = new Offer({
       account: account,
       buy: {
         currency: "XAG",

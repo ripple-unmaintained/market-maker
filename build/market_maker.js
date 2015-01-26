@@ -1,11 +1,16 @@
 "use strict";
 
+var _prototypeProperties = function (child, staticProps, instanceProps) {
+  if (staticProps) Object.defineProperties(child, staticProps);
+  if (instanceProps) Object.defineProperties(child.prototype, instanceProps);
+};
+
 var RippleAccountMonitor = require("ripple-account-monitor");
 var Promise = require("bluebird");
 var TIMEOUT = 10000;
 
 var MarketMaker = (function () {
-  var MarketMaker = function MarketMaker(options) {
+  function MarketMaker(options) {
     if (!options) {
       throw new Error("No module found");
     }
@@ -39,29 +44,44 @@ var MarketMaker = (function () {
       account: options.address,
       secret: options.secret
     });
-  };
+  }
 
-  MarketMaker.prototype.getMarket = function () {
-    return new Market(this).fetch();
-  };
-
-  MarketMaker.prototype.setMarket = function () {
-    return new Market(this).save();
-  };
-
-  MarketMaker.prototype.start = function () {
-    var _this = this;
-    Promise["while"](function () {
-      return true;
-    }, function (next) {
-      setTimeout(function () {
-        setMarket.then(next).error(function (error) {
-          console.log("ERROR", error);
-          next();
+  _prototypeProperties(MarketMaker, null, {
+    getMarket: {
+      value: function getMarket() {
+        return new Market(this).fetch();
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    setMarket: {
+      value: function setMarket() {
+        return new Market(this).save();
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    },
+    start: {
+      value: function start() {
+        var _this = this;
+        Promise["while"](function () {
+          return true;
+        }, function (next) {
+          setTimeout(function () {
+            setMarket.then(next).error(function (error) {
+              console.log("ERROR", error);
+              next();
+            });
+          }, _this.timeout);
         });
-      }, _this.timeout);
-    });
-  };
+      },
+      writable: true,
+      enumerable: true,
+      configurable: true
+    }
+  });
 
   return MarketMaker;
 })();

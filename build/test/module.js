@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-  function Person() {}
+  var Person = function () {};
 
   return Person;
 })();

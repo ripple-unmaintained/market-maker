@@ -24,18 +24,11 @@ class Market {
   }
 
   update() {
-    this.fetch().then(offers) {
+    this.fetch().then(function(offers) {
       // got offers from market maker  
       // sum the offers
     })
     // cancel expired orders and submit new orders asynchronously
-  }
-
-  private sumOffers(offers) {
-    var sum = 0;
-    
-
-    return offers
   }
 }
 
