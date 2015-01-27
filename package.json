@@ -1,6 +1,6 @@
 {
   "name": "market-maker",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Automatically make a market between XRP and any single issued currency.",
   "main": "buid/market_maker.js",
   "scripts": {
