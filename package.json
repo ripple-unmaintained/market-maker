@@ -2,7 +2,7 @@
   "name": "market-maker",
   "version": "0.1.4",
   "description": "Automatically make a market between XRP and any single issued currency.",
-  "main": "buid/index.js",
+  "main": "buid/market_maker.js",
   "scripts": {
     "test": "npm run build && mocha -R spec build/test --timeout 10000",
     "build": "gulp",
@@ -23,7 +23,8 @@
     "gulp-6to5": "",
     "ripple-account-monitor": "",
     "ripple-lib": "",
-    "ripple-rest-client": ""
+    "ripple-rest-client": "",
+    "superagent": "^0.21.0"
   },
   "author": "",
   "license": "ISC"

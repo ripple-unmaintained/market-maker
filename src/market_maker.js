@@ -1,6 +1,7 @@
-var RippleAccountMonitor = require('ripple-account-monitor');
-var Promise              = require('bluebird');
-var TIMEOUT              = 10000;
+var RippleAccountMonitor = require('ripple-account-monitor')
+var Promise              = require(__dirname+'/promise')
+var TIMEOUT              = 10000
+var Market               = require(__dirname+'/market')
 
 class MarketMaker {
  
@@ -19,11 +20,13 @@ class MarketMaker {
     this.address        = options.address
     this.secret         = options.secret
     this.timeout        = options.timeout || TIMEOUT
+    /*
     this.accountMonitor = new RippleAccountMonitor({
       rippleRestUrl: 'https://api.ripple.com/v1',
       account: options.address,
       secret : options.secret
     })
+    */
   }
 
   getMarket() {
@@ -37,15 +40,21 @@ class MarketMaker {
   start() {
     var _this = this;
     Promise.while(function() { return true },
-    function(next) {
-      setTimeout(function() {
-        setMarket
-          .then(next)
+    function() {
+      return new Promise(function(resolve, reject) {
+        console.log('When implemented this will update the market every', TIMEOUT / 1000, 'seconds');
+        setTimeout(function() {
+          new Market(_this).fetch()
+          .then(function(market) {
+            console.log('market', market)
+          })
+          .then(resolve)
           .error(function(error) {
-            console.log('ERROR', error)
-            next()
-          });
-      }, _this.timeout)
+            console.log('error fetching market', error)
+            resolve()
+          })
+        }, _this.timeout)
+      });
     });
   }
 }

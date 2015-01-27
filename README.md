@@ -26,6 +26,7 @@ The following environment variables must be set, which provide the ripple secret
 - RIPPLE_MARKET_ISSUER
 - RIPPLE_MARKET_XRP_DEPTH
 - RIPPLE_MARKET_XRP_PRICE
+- RIPPLE_REST_URL
 
 ## Processes
 Market Maker is composed of two concurrent processes. The first watches the ripple ledger for trades on the market currency, and notes which adjustments must be made to reconstruct the desired market. The second actually performs updates to the ripple market ledger by placing new orders.

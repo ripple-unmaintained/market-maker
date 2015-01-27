@@ -1,26 +1,32 @@
-var RippleAccountMonitor = require('ripple-account-monitor');
-var rippleLib            = require('ripple-lib');
+var RippleAccountMonitor = require('ripple-account-monitor')
+var rippleLib            = require('ripple-lib')
+var http                 = require('superagent')
+var Promise              = require(__dirname+'/promise')
+var RIPPLE_REST_URL      = process.env['RIPPLE_REST_URL'] || 'https://api.ripple.com'
 
 class Market {
  
-  constructor(options) {
-    this.rate = options.rate
-    this.buy  = options.buy
-    this.sell = options.sell
+  constructor(marketMaker) {
+    //this.rate = options.rate
+    //this.buy  = options.buy
+    //this.sell = options.sell
     this.marketMaker = marketMaker
   }
 
   fetch() {
-    var book = new lib.OrderBook({
-      taker_gets: {
-      },
-      taker_pays: {
-      }
-    }) 
-    var offersAtRate = _.filter(offers, function(offer) {
-
+    var _this = this
+    return new Promise(function(resolve, reject) {
+      http
+        .get(RIPPLE_REST_URL+'/v1/accounts/'+_this.marketMaker.address+'/orders')
+        .end(function(error, response) {
+          if (error) { return reject(error) }
+          if (response.statusCode < 300) {
+            resolve(response.body)
+          } else {
+            reject(response.error)
+          }
+        })
     })
-    // return list of all orders from XRP to currency by address
   }
 
   update() {

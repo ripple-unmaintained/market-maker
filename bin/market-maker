@@ -1,22 +1,29 @@
 #!/usr/local/bin/node
-var program = require('commander');
+var program     = require('commander')
+var MarketMaker = require(__dirname+'/../build/market_maker')
+var Market      = require(__dirname+'/../build/market')
 
 program
   .command('start')
   .description('start a market-maker trading bot')
   .action(function() {
-    startMarket()
-  });
+
+    var marketMaker = new MarketMaker({
+      getRate   : function() {},
+      getAmount : function() {},
+      currency  : 'XRX',
+      issuer    : 'r4EwBWxrx5HxYRyisfGzMto3AT8FZiYdWk',
+      address   : process.env['RIPPLE_MARKET_MAKER_ADDRESS'],
+      secret    : process.env['RIPPLE_MARKET_MAKER_SECRET']
+    })
+
+    marketMaker.start()
+
+    new Market(marketMaker).fetch()
+      .then(function(response) { console.log('market', response) })
+      .error(console.log)
+  })
 
 program
-  .parse(process.argv);
+  .parse(process.argv)
 
-function startMarket() {
-  console.log('')
-  console.log('============================================================')
-  console.log('Alas this software is SUPER alpha, ie does not work at all.');
-  console.log('Please try again later or contact those bums at Ripple Labs');
-  console.log('Contributions are accepted at https://github.com/ripple/market-maker');
-  console.log('============================================================')
-  console.log('');
-}
